@@ -198,6 +198,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+        Illuminate\Notifications\NotificationServiceProvider::class,
 
     ],
 

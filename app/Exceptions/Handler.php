@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -24,6 +25,16 @@ class Handler extends ExceptionHandler
     protected $dontReport = [
         //
     ];
+
+    public function report(Throwable $exception)
+    {
+        Log::error($exception);
+        if ($this->shouldReport($exception)) {
+            (new TelegramLogHandler)->report($exception);
+        }
+
+        parent::report($exception);
+    }
 
     /**
      * A list of the inputs that are never flashed to the session on validation exceptions.

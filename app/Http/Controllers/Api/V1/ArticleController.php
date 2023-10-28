@@ -26,6 +26,7 @@ final class ArticleController extends Controller
      */
     public function index(): \Illuminate\Http\JsonResponse
     {
+        throw new \Exception('test');
         $articles = app(Pipeline::class)
             ->send(Article::query()->with('author'))
             ->through(
