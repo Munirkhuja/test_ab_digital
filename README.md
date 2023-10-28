@@ -7,6 +7,17 @@
 - `php artisan co:ca`
 - `chmod -R 775 storage bootstrap/cache`
 
+# 3 task
+    в метод register AppServiceProvider-а добавил строки:
+    Model::preventLazyLoading(!app()->isProduction());
+    Model::preventAccessingMissingAttributes(!app()->isProduction());
+    который позволяет понять в каких запросах lazy load и не прописан with для выборки отношонение запроса.
+    пример: Article::query()->get() во время того как показываем имя автора будут дубликаты одинаковых запросов,
+    в этом случае оптимизировал запрос с добавление with:
+    Article::query()->with('author')->get() или Article::query()->withAggregate('author','name')->get()
+    другой вариант это добавление JOIN.
+    Другие инструменты которых используют для оптимизации запроса это Telescope и Laravel Debugbar
+    дают возможность понят какые запросы медленно исполняються.
 # API
 
 ## Article

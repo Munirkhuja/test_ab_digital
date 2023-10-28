@@ -27,7 +27,7 @@ final class ArticleController extends Controller
     public function index(): \Illuminate\Http\JsonResponse
     {
         $articles = app(Pipeline::class)
-            ->send(Article::query())
+            ->send(Article::query()->with('author'))
             ->through(
                 [
                     Title::class,
