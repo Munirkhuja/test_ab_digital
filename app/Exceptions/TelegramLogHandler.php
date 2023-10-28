@@ -12,13 +12,7 @@ class TelegramLogHandler extends Exception
     {
         if ($this->isCriticalError($exception)) {
             dispatch(new TelegramLogError('Произошла критическая ошибка: ' . $exception->getMessage()));
-
-            Log::build(
-                [
-                    'driver' => 'single',
-                    'path' => storage_path('logs/error.log'),
-                ]
-            )->error($exception->getMessage(), $exception->getTrace());
+            Log::error($exception);
         }
     }
 

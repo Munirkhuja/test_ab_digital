@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Article\StoreRequest;
 use App\Http\Requests\Article\UpdateRequest;
-use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\ArticleCollection;
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;
@@ -14,7 +13,6 @@ use App\QueryFilters\CursorPaginateLoc;
 use App\QueryFilters\Sort;
 use App\QueryFilters\Text;
 use App\QueryFilters\Title;
-use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
 
 final class ArticleController extends Controller
@@ -26,7 +24,6 @@ final class ArticleController extends Controller
      */
     public function index(): \Illuminate\Http\JsonResponse
     {
-        throw new \Exception('test');
         $articles = app(Pipeline::class)
             ->send(Article::query()->with('author'))
             ->through(

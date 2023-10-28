@@ -22,7 +22,8 @@ class ArticleResource extends JsonResource
         'author_id' => "mixed",
         'created_at' => "string",
         'updated_at' => "string"
-    ])] public function toArray($request)
+    ])]
+    public function toArray($request)
     {
         return [
             'id' => $this->id,

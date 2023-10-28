@@ -28,7 +28,6 @@ class Handler extends ExceptionHandler
 
     public function report(Throwable $exception)
     {
-        Log::error($exception);
         if ($this->shouldReport($exception)) {
             (new TelegramLogHandler)->report($exception);
         }
